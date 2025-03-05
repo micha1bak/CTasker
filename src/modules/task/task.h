@@ -6,10 +6,10 @@
 typedef struct {
 	int id;
 	char name[250];
-    bool idCompleted;
+    bool isCompleted;
 } Task;
 
-void addTask(Task *task);
+void addTask(char* taskName);
 void removeTask(int taskId);
 void completeTask(int taskId);
 
