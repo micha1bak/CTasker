@@ -5,4 +5,4 @@ void displayHeader(void);
 void displayTaskRow(void);
 void displayAllTasks(void);
 
-#endif //UI_H
+#endif
