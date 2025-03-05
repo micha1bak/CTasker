@@ -1,8 +1,9 @@
 #ifndef DB_H
 #define DB_H
 
-#define DB_MAX_SIZE 100
+#include "../task/task.h"
 
+#define DB_MAX_SIZE 100
 extern Task db[DB_MAX_SIZE];
 extern int dbSize;
 

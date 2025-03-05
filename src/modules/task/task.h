@@ -10,7 +10,7 @@ typedef struct {
 } Task;
 
 void addTask(char* taskName);
-void removeTask(int taskId);
+void deleteTask(int taskId);
 void completeTask(int taskId);
 
 #endif

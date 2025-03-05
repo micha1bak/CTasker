@@ -8,7 +8,7 @@ void addTask(char* taskName) {
     strcpy(db[dbSize].name, taskName);
 }
 
-void removeTask(int taskId) {
+void deleteTask(int taskId) {
 	taskId--;
     for (int i = 0; i < dbSize; i++) {
       	db[taskId].id = db[taskId + 1].id;

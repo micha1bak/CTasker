@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include "./modules/task/task.h"
-#include "./modules/db/db.h"
+#include "./modules/menu/menu.h"
 
-int main(void) {
-
-	Task task = {1, "First Task", false};
-	printf("%d\n %s\n", task.id, task.name);
-
-	return 0;
+void main(void) {
+	printf("+---------------------------------------------------------------+\n");
+	printf("|                        To Do App!                             |\n");
+	printf("+---------------------------------------------------------------+\n");
+	while (1) {
+		displayMenu();
+	}
 }
+
