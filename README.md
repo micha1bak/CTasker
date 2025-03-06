@@ -25,8 +25,8 @@ A command-line To-Do application written in C.
 Clone the repository and compile the project using `gcc`:
 
 ````
-git clone https://github.com/yourusername/c-todo-cli.git
-cd c-todo-cli
+git clone https://github.com/micha1bak/CTasker.git
+cd CTasker
 gcc -o CTasker main.c
 ````
 
