@@ -12,6 +12,7 @@ void create_todo(int id, char name[250], bool isCompleted) {
 	todo.isCompleted = isCompleted;
 	todos[todos_size] = todo;
 	todos_size++;
+	printf("Created a todo.\n");
 }
 
 void delete_todo(int id) {
@@ -24,15 +25,62 @@ void delete_todo(int id) {
 		todos[i].id--;
 	}
 	todos_size--;
+	printf("Deleted a todo.\n");
 }
 
 void modify_todo(int id) {
 	todos[id].isCompleted = true;
+	printf("Updated a todo.\n");
 }
 
 void display_todos(void) {
+	printf("+======================================+\n");
+	printf("| ID  |        TODO           | Status |\n");
+	printf("+======================================+\n");
 	for (int i = 0; i < todos_size; i++) {
-		printf("id: %d, name: %s, status: %d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+		printf("| %-3d | %-21s | %-6d |\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+	}
+	printf("+======================================+\n");
+}
+
+void save_todos_to_file(const char *filename) {
+	FILE *fptr = fopen(filename, "w");
+	if (fptr == NULL) {
+		printf("Err\n");
+		return;
+	}
+	for (int i = 0; i < todos_size; i++) {
+		fprintf(fptr, "%d|%s|%d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+	}
+	fclose(fptr);
+	printf("Saved to %s\n", FILENAME);
+}
+
+void read_todos_from_file(const char *filename) {
+	FILE *fptr = fopen(filename, "r");
+	if (fptr == NULL) {
+		printf("Err\n");
+		return;
+	}
+	char line[300];
+	while (fgets(line, sizeof(line), fptr) && todos_size < MAX_TODOS ) {
+		line[strcspn(line, "\n")] = '\0';
+		int id, isCompleted;
+		char name[250];
+		if (sscanf(line, "%d|%249[^|]|%d", &id, name, &isCompleted) == 3) {
+			todos[todos_size].id = id;
+			strcpy(todos[todos_size].name, name);
+			todos[todos_size].isCompleted = isCompleted;
+			todos_size++;
+		}
+	}
+	fclose(fptr);
+}
+
+void freeze_program(void) {
+	printf("Press Enter to go back to menu.");
+	getchar();
+	for (int i = 0; i < 50; i++) {
 		printf("\n");
 	}
 }

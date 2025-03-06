@@ -2,16 +2,14 @@
 #include <string.h>
 #include "lib/todo.h"
 
-void save_todos_to_file(const char *filename);
-void read_todos_from_file(const char *filename);
-
 int main(void) {
 	int driver = 1;
 	while (driver) {
 		int temp_id = 0;
 		char temp_name[250];
 		printf("+======================================+\n");
-		printf("| Choose one of the following options: |\n");
+		printf("|                MENU                  |\n");
+		printf("+======================================+\n");
 		printf("| 1. Show the list of todos            |\n");
 		printf("| 2. Add a new todo                    |\n");
 		printf("| 3. Modify an existing todo           |\n");
@@ -30,6 +28,7 @@ int main(void) {
 		switch (driver) {
 			case 1:
 				display_todos();
+				freeze_program();
 				break;
 			case 2:
 				printf("Enter todo: ");
@@ -39,59 +38,32 @@ int main(void) {
 				}
 				temp_name[strcspn(temp_name, "\n")] = '\0';
 				create_todo(todos_size, temp_name, false);
+				freeze_program();
 				break;
 			case 3:
 				printf("Enter id: ");
 				scanf("%d", &temp_id);
 				modify_todo(temp_id);
+				freeze_program();
 				break;
 			case 4:
 				printf("Enter id: ");
 				scanf("%d", &temp_id);
 				delete_todo(temp_id);
+				freeze_program();
 				break;
 			case 5:
-				read_todos_from_file("todos.txt");
+				read_todos_from_file(FILENAME);
+				display_todos();
+				freeze_program();
 				break;
 			case 6:
-				save_todos_to_file("todos.txt");
+				save_todos_to_file(FILENAME);
+				freeze_program();
 				break;
 			case 7:
 				driver = 0;
 		}
 	}
 	return 0;
-}
-
-void save_todos_to_file(const char *filename) {
-	FILE *fptr = fopen(filename, "w");
-	if (fptr == NULL) {
-		printf("Err\n");
-		return;
-	}
-	for (int i = 0; i < todos_size; i++) {
-		fprintf(fptr, "%d|%s|%d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
-	}
-	fclose(fptr);
-}
-
-void read_todos_from_file(const char *filename) {
-	FILE *fptr = fopen(filename, "r");
-	if (fptr == NULL) {
-		printf("Err\n");
-		return;
-	}
-	char line[300];
-	while (fgets(line, sizeof(line), fptr) && todos_size < MAX_TODOS ) {
-		line[strcspn(line, "\n")] = '\0';
-		int id, isCompleted;
-		char name[250];
-		if (sscanf(line, "%d|%249[^|]|%d", &id, name, &isCompleted) == 3) {
-			todos[todos_size].id = id;
-			strcpy(todos[todos_size].name, name);
-			todos[todos_size].isCompleted = isCompleted;
-			todos_size++;
-		}
-	}
-	fclose(fptr);
 }
