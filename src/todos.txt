@@ -1,2 +1,0 @@
-1|Zadanie 1|0
-2|Zadanie 2|1
