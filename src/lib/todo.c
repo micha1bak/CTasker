@@ -32,16 +32,17 @@ void modify_todo(int id) {
 }
 
 void display_todos(void) {
-	printf("+======================================+\n");
-	printf("| ID  |        TODO           | Status |\n");
-	printf("+======================================+\n");
+	printf("+==============================================================+\n");
+	printf("| ID  |                  TODO                     |   Status   |\n");
+	printf("+==============================================================+\n");
 	if (todos_size == 0) {
-		printf("|     |                       |        |\n");
+		printf("|     |                                           |            |\n");
 	}
 	for (int i = 0; i < todos_size; i++) {
-		printf("| %-3d | %-21s | %-6d |\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+		printf("| %-3d | %-42s | %-9s |\n", todos[i].id, todos[i].name,
+			todos[i].isCompleted ? "Completed" : "Pending");
 	}
-	printf("+======================================+\n\n");
+	printf("+==============================================================+\n\n");
 }
 
 void save_todos_to_file(const char *filename) {
