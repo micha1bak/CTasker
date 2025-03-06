@@ -2,6 +2,9 @@
 #include <string.h>
 #include "lib/todo.h"
 
+void save_todos_to_file(Todo todos[], int todos_size, const char *filename);
+int read_todos_from_file(Todo todos[], const char *filename);
+
 int main(void) {
 	int driver = 1;
 	while (driver) {
@@ -13,7 +16,9 @@ int main(void) {
 		printf("| 2. Add a new todo                    |\n");
 		printf("| 3. Modify an existing todo           |\n");
 		printf("| 4. Delete a todo from the list       |\n");
-		printf("| 5. Exit                              |\n");
+		printf("| 5. Read todos from a file            |\n");
+		printf("| 6. Save todos to a file              |\n");
+		printf("| 7. Exit                              |\n");
 		printf("+======================================+\n");
 		printf(">> ");
 		if (scanf("%d", &driver) != 1) {
@@ -46,8 +51,45 @@ int main(void) {
 				delete_todo(temp_id);
 				break;
 			case 5:
+				read_todos_from_file(todos, "todos.txt");
+			case 7:
 				driver = 0;
 		}
 	}
 	return 0;
+}
+
+void save_todos_to_file(Todo todos[], int todos_size, const char *filename) {
+	FILE *file = fopen(filename, "w");
+	if (file == NULL) {
+		printf("Nie można otworzyć pliku do zapisu.\n");
+		return;
+	}
+	for (int i = 0; i < todos_size; i++) {
+		fprintf(file, "%d|%s|%d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+	}
+	fclose(file);
+}
+
+int read_todos_from_file(Todo todos[], const char *filename) {
+	FILE *file = fopen(filename, "r");
+	if (file == NULL) {
+		printf("Nie można otworzyć pliku do odczytu.\n");
+		return 0;
+	}
+	int count = 0;
+	char line[300];
+	while (fgets(line, sizeof(line), file) && count < MAX_TODOS) {
+		line[strcspn(line, "\n")] = '\0';
+		int id, isCompleted;
+		char name[250];
+		if (sscanf(line, "%d|%249[^|]|%d", &id, name, &isCompleted) == 3) {
+			todos[count].id = id;
+			strcpy(todos[count].name, name);
+			todos[count].isCompleted = isCompleted;
+			count++;
+		}
+	}
+	fclose(file);
+	return count;
 }
