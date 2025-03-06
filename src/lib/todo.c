@@ -12,7 +12,6 @@ void create_todo(int id, char name[250], bool isCompleted) {
 	todo.isCompleted = isCompleted;
 	todos[todos_size] = todo;
 	todos_size++;
-	printf("Created a todo.\n");
 }
 
 void delete_todo(int id) {
@@ -30,17 +29,19 @@ void delete_todo(int id) {
 
 void modify_todo(int id) {
 	todos[id].isCompleted = true;
-	printf("Updated a todo.\n");
 }
 
 void display_todos(void) {
 	printf("+======================================+\n");
 	printf("| ID  |        TODO           | Status |\n");
 	printf("+======================================+\n");
+	if (todos_size == 0) {
+		printf("|     |                       |        |\n");
+	}
 	for (int i = 0; i < todos_size; i++) {
 		printf("| %-3d | %-21s | %-6d |\n", todos[i].id, todos[i].name, todos[i].isCompleted);
 	}
-	printf("+======================================+\n");
+	printf("+======================================+\n\n");
 }
 
 void save_todos_to_file(const char *filename) {
@@ -78,8 +79,11 @@ void read_todos_from_file(const char *filename) {
 }
 
 void freeze_program(void) {
-	printf("Press Enter to go back to menu.");
+	printf("Press Enter to go back to menu.\n");
 	getchar();
+}
+
+void clean_screen(void) {
 	for (int i = 0; i < 50; i++) {
 		printf("\n");
 	}

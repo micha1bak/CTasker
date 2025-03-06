@@ -1,7 +1,7 @@
 #ifndef TODO_H
 #define TODO_H
 #define MAX_TODOS 100
-#define FILENAME "todos.txt"
+#define FILENAME "../todos.txt"
 #include <stdbool.h>
 
 typedef struct Todo {
@@ -20,5 +20,6 @@ void display_todos(void);
 void save_todos_to_file(const char *filename);
 void read_todos_from_file(const char *filename);
 void freeze_program(void);
+void clean_screen(void);
 
 #endif
