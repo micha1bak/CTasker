@@ -2,29 +2,14 @@
 #include <string.h>
 #include "lib/todo.h"
 
+void display_menu(void);
+
 int main(void) {
 	int driver = 1;
 	while (driver) {
 		int temp_id = 0;
 		char temp_name[250];
-		printf("+==============================================================+\n");
-		printf("|                             MENU                             |\n");
-		printf("+==============================================================+\n");
-		printf("| 1 | Show the list of todos                                   |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 2 | Add a new todo                                           |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 3 | Mark todo as completed                                   |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 4 | Delete a todo from the list                              |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 5 | Read todos from a file                                   |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 6 | Save todos to a file                                     |\n");
-		printf("|--------------------------------------------------------------|\n");
-		printf("| 7 | Exit                                                     |\n");
-		printf("+==============================================================+\n");
-		printf(">> ");
+		display_menu();
 		if (scanf("%d", &driver) != 1) {
 			printf("Invalid input! Please enter a number.\n");
 			while (getchar() != '\n');
@@ -84,4 +69,25 @@ int main(void) {
 		}
 	}
 	return 0;
+}
+
+void display_menu(void) {
+	printf("+==============================================================+\n");
+	printf("|                             MENU                             |\n");
+	printf("+==============================================================+\n");
+	printf("| 1 | Show the list of todos                                   |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 2 | Add a new todo                                           |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 3 | Mark todo as completed                                   |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 4 | Delete a todo from the list                              |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 5 | Read todos from a file                                   |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 6 | Save todos to a file                                     |\n");
+	printf("|--------------------------------------------------------------|\n");
+	printf("| 7 | Exit                                                     |\n");
+	printf("+==============================================================+\n");
+	printf(">> ");
 }
