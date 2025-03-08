@@ -20,6 +20,5 @@ void display_todos(void);
 void save_todos_to_file(const char *filename);
 void read_todos_from_file(const char *filename);
 void freeze_program(void);
-void clean_screen(void);
 
 #endif
