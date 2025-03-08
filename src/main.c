@@ -7,7 +7,6 @@ int main(void) {
 	while (driver) {
 		int temp_id = 0;
 		char temp_name[250];
-		clean_screen();
 		printf("+==============================================================+\n");
 		printf("|                             MENU                             |\n");
 		printf("+==============================================================+\n");
@@ -34,13 +33,10 @@ int main(void) {
 		while (getchar() != '\n');
 		switch (driver) {
 			case 1:
-				clean_screen();
 				display_todos();
 				freeze_program();
-				clean_screen();
 				break;
 			case 2:
-				clean_screen();
 				display_todos();
 				printf("Enter a todo discription:\n");
 				printf(">> ");
@@ -52,10 +48,8 @@ int main(void) {
 				create_todo(todos_size, temp_name, false);
 				display_todos();
 				freeze_program();
-				clean_screen();
 				break;
 			case 3:
-				clean_screen();
 				display_todos();
 				printf("Enter id:\n");
 				printf(">> ");
@@ -66,7 +60,6 @@ int main(void) {
 				freeze_program();
 				break;
 			case 4:
-				clean_screen();
 				display_todos();
 				printf("Enter id:\n");
 				printf(">> ");
@@ -75,21 +68,16 @@ int main(void) {
 				delete_todo(temp_id);
 				display_todos();
 				freeze_program();
-				clean_screen();
 				break;
 			case 5:
 				read_todos_from_file(FILENAME);
-				clean_screen();
 				display_todos();
 				freeze_program();
-				clean_screen();
 				break;
 			case 6:
-				clean_screen();
 				save_todos_to_file(FILENAME);
 				display_todos();
 				freeze_program();
-				clean_screen();
 				break;
 			case 7:
 				driver = 0;

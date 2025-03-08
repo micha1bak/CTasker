@@ -36,7 +36,12 @@ void display_todos(void) {
 	printf("| ID  |                  TODO                     |   Status   |\n");
 	printf("+==============================================================+\n");
 	if (todos_size == 0) {
-		printf("|     |                                           |            |\n");
+		for (int i = 0; i < 6; i++) {
+			printf("|     |                                           |            |\n");
+			if (i < 5) {
+				printf("|--------------------------------------------------------------|\n");
+			}
+		}
 	}
 	for (int i = 0; i < todos_size; i++) {
 		printf("| %-3d | %-42s | %-9s |\n", todos[i].id, todos[i].name,
@@ -82,10 +87,4 @@ void read_todos_from_file(const char *filename) {
 void freeze_program(void) {
 	printf("Press Enter to go back to menu.\n");
 	getchar();
-}
-
-void clean_screen(void) {
-	for (int i = 0; i < 50; i++) {
-		printf("\n");
-	}
 }
