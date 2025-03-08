@@ -27,7 +27,7 @@ void delete_todo(int id) {
 	printf("Deleted a todo.\n");
 }
 
-void modify_todo(int id) {
+void complete_todo(int id) {
 	todos[id].isCompleted = true;
 }
 
@@ -35,19 +35,19 @@ void display_todos(void) {
 	printf("+==============================================================+\n");
 	printf("| ID  |                  TODO                     |   Status   |\n");
 	printf("+==============================================================+\n");
-	if (todos_size == 0) {
-		for (int i = 0; i < 6; i++) {
-			printf("|     |                                           |            |\n");
-			if (i < 5) {
-				printf("|--------------------------------------------------------------|\n");
-			}
-		}
-	}
 	for (int i = 0; i < todos_size; i++) {
 		printf("| %-3d | %-42s | %-9s |\n", todos[i].id, todos[i].name,
 			todos[i].isCompleted ? "Completed" : "Pending");
 	}
+	if (todos_size < 10) {
+		for (int i = 0; i < 10; i++) {
+			printf("|     |                                           |            |\n");
+		}
+	}
+	printf("+==============================================================+\n");
+	printf("|   1 - Add   |   2 - Complete  |  3 - Delete   |   4 - Exit   |\n");
 	printf("+==============================================================+\n\n");
+	printf(">>");
 }
 
 void save_todos_to_file(const char *filename) {
@@ -60,7 +60,6 @@ void save_todos_to_file(const char *filename) {
 		fprintf(fptr, "%d|%s|%d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
 	}
 	fclose(fptr);
-	printf("Saved to %s\n", FILENAME);
 }
 
 void read_todos_from_file(const char *filename) {
@@ -82,9 +81,4 @@ void read_todos_from_file(const char *filename) {
 		}
 	}
 	fclose(fptr);
-}
-
-void freeze_program(void) {
-	printf("Press Enter to go back to menu.\n");
-	getchar();
 }
