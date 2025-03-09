@@ -45,6 +45,9 @@ int main(void) {
 				break;
 			case 4:
 				driver = 0;
+				break;
+			default:
+				printf("Invalid input! Please enter a number.\n");
 		}
 	}
 	return 0;

@@ -7,7 +7,7 @@ int todos_size = 0;
 
 void create_todo(int id, char name[250], bool isCompleted) {
 	Todo todo;
-	todo.id = id;
+	todo.id = id + 1;
 	strcpy(todo.name, name);
 	todo.isCompleted = isCompleted;
 	todos[todos_size] = todo;
@@ -19,7 +19,7 @@ void delete_todo(int id) {
 		printf("Id out of range\n");
 		return;
 	}
-	for (int i = id; i <= todos_size - id; i++) {
+	for (int i = id - 1; i <= todos_size - id; i++) {
 		todos[i] = todos[i + 1];
 		todos[i].id--;
 	}
@@ -28,7 +28,7 @@ void delete_todo(int id) {
 }
 
 void complete_todo(int id) {
-	todos[id].isCompleted = true;
+	todos[id - 1].isCompleted = true;
 }
 
 void display_todos(void) {
@@ -36,7 +36,7 @@ void display_todos(void) {
 	printf("| ID  |                  TODO                     |   Status   |\n");
 	printf("+==============================================================+\n");
 	for (int i = 0; i < todos_size; i++) {
-		printf("| %-3d | %-42s | %-9s |\n", todos[i].id, todos[i].name,
+		printf("| %-3d | %-41s | %-10s |\n", todos[i].id, todos[i].name,
 			todos[i].isCompleted ? "Completed" : "Pending");
 	}
 	if (todos_size < 10) {
