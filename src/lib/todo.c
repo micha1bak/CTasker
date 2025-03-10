@@ -59,7 +59,7 @@ void save_todos_to_file(const char *filename) {
 		return;
 	}
 	for (int i = 0; i < todos_size; i++) {
-		fprintf(fptr, "%d|%s|%d\n", todos[i].id, todos[i].name, todos[i].isCompleted);
+		fprintf(fptr, "%d|%s|%d|%d\n", todos[i].id, todos[i].name, todos[i].priority ,todos[i].isCompleted);
 	}
 	fclose(fptr);
 }
@@ -73,11 +73,12 @@ void read_todos_from_file(const char *filename) {
 	char line[300];
 	while (fgets(line, sizeof(line), fptr) && todos_size < MAX_TODOS ) {
 		line[strcspn(line, "\n")] = '\0';
-		int id, isCompleted;
+		int id, priority, isCompleted;
 		char name[250];
-		if (sscanf(line, "%d|%249[^|]|%d", &id, name, &isCompleted) == 3) {
+		if (sscanf(line, "%d|%249[^|]|%d|%d", &id, name, &priority, &isCompleted) == 4) {
 			todos[todos_size].id = id;
 			strcpy(todos[todos_size].name, name);
+			todos[todos_size].priority = priority;
 			todos[todos_size].isCompleted = isCompleted;
 			todos_size++;
 		}
