@@ -2,20 +2,21 @@
 #include <string.h>
 #include "todo.h"
 
-Todo todos[100];
+Todo todos[MAX_TODOS];
 int todos_size = 0;
 
-void create_todo(int id, char name[250], bool isCompleted) {
+void create_todo(int id, char name[250], int priority, bool isCompleted) {
 	Todo todo;
 	todo.id = id + 1;
 	strcpy(todo.name, name);
+	todo.priority = priority;
 	todo.isCompleted = isCompleted;
 	todos[todos_size] = todo;
 	todos_size++;
 }
 
 void delete_todo(int id) {
-	if (id >= todos_size) {
+	if (id > todos_size) {
 		printf("Id out of range\n");
 		return;
 	}
@@ -32,21 +33,22 @@ void complete_todo(int id) {
 }
 
 void display_todos(void) {
-	printf("+==============================================================+\n");
-	printf("| ID  |                  TODO                     |   Status   |\n");
-	printf("+==============================================================+\n");
+	printf("+=========================================================================+\n");
+	printf("| ID  |                  TODO                 |  Priority  |    Status    |\n");
+	printf("+=========================================================================+\n");
 	for (int i = 0; i < todos_size; i++) {
-		printf("| %-3d | %-41s | %-10s |\n", todos[i].id, todos[i].name,
+		printf("| %-3d | %-37s | %-10s | %-12s |\n", todos[i].id, todos[i].name,
+			todos[i].priority == 1 ? "!" : todos[i].priority == 2 ? "!!" : "!!!",
 			todos[i].isCompleted ? "Completed" : "Pending");
 	}
 	if (todos_size < 10) {
 		for (int i = 0; i < 10; i++) {
-			printf("|     |                                           |            |\n");
+			printf("|     |                                       |            |              |\n");
 		}
 	}
-	printf("+==============================================================+\n");
-	printf("|   1 - Add   |   2 - Complete  |  3 - Delete   |   4 - Exit   |\n");
-	printf("+==============================================================+\n\n");
+	printf("+=========================================================================+\n");
+	printf("|    1 - Add    |    2 - Complete    |    3 - Delete     |    4 - Exit    |\n");
+	printf("+=========================================================================+\n\n");
 	printf(">>");
 }
 

@@ -4,16 +4,17 @@
 #define FILENAME "../todos.txt"
 #include <stdbool.h>
 
-typedef struct Todo {
+typedef struct {
 	int id;
 	char name[250];
+	int priority;
 	bool isCompleted;
 } Todo;
 
-extern Todo todos[100];
+extern Todo todos[MAX_TODOS];
 extern int todos_size;
 
-void create_todo(int id, char name[250], bool isCompleted);
+void create_todo(int id, char name[250],int temp_priority, bool isCompleted);
 void delete_todo(int id);
 void complete_todo(int id);
 void display_todos(void);
