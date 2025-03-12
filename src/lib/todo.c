@@ -32,26 +32,48 @@ void delete_todo(int id)
 	printf("Deleted a todo.\n");
 }
 
-void complete_todo(int id) {
-	todos[id - 1].isCompleted = true;
+void update_todo(int id, int prop)
+{
+	if (prop < 1 || prop > 2) {
+		printf("Invalid property\n");
+		return;
+	}
+	if (prop == 1)
+	{
+		todos[id - 1].isCompleted = true;
+		return;
+	}
+	int new_priority;
+	printf("Set priority ( 1 - low, 2 - medium, 3 - high)\n>> ");
+	scanf("%d", &new_priority);
+	if (new_priority < 1 || new_priority > 3)
+	{
+		printf("Invalid priority\n");
+		return;
+	}
+	todos[id - 1].priority = new_priority;
 }
 
-void display_todos(void) {
+void display_todos(void)
+{
 	printf("+=========================================================================+\n");
 	printf("| ID  |                  TODO                 |  Priority  |    Status    |\n");
 	printf("+=========================================================================+\n");
-	for (int i = 0; i < todos_size; i++) {
+	for (int i = 0; i < todos_size; i++)
+	{
 		printf("| %-3d | %-37s | %-10s | %-12s |\n", todos[i].id, todos[i].name,
 			todos[i].priority == 1 ? "!" : todos[i].priority == 2 ? "!!" : "!!!",
 			todos[i].isCompleted ? "Completed" : "Pending");
 	}
-	if (todos_size < 10) {
-		for (int i = 0; i < 10; i++) {
+	if (todos_size < 10)
+	{
+		for (int i = 0; i < 10; i++)
+		{
 			printf("|     |                                       |            |              |\n");
 		}
 	}
 	printf("+=========================================================================+\n");
-	printf("|    1 - Add    |    2 - Complete    |    3 - Delete     |    4 - Exit    |\n");
+	printf("|    1 - Add    |    2 - Update     |     3 - Delete     |    4 - Exit    |\n");
 	printf("+=========================================================================+\n\n");
 	printf(">>");
 }
