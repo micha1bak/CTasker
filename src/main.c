@@ -2,8 +2,13 @@
 #include <string.h>
 #include "lib/todo.h"
 
-int main(void) {
-	read_todos_from_file(FILENAME);
+int main(int argc, char *argv[])
+{
+
+	if (argc > 1)
+	{
+		read_todos_from_file(argv[1]);
+	}
 	int driver = 1;
 	while (driver) {
 		int temp_id = 0;
@@ -27,21 +32,30 @@ int main(void) {
 				printf("Enter a todo priority ( 1 - low, 2 - medium, 3 - high)\n>> ");
 				scanf("%d", &temp_priority);
 				create_todo(todos_size, temp_name, temp_priority, false);
-				save_todos_to_file(FILENAME);
+				if (argc > 1)
+				{
+					save_todos_to_file(argv[1]);
+				}
 				break;
 			case 2:
 				printf("Enter id:\n>> ");
 				scanf("%d", &temp_id);
 				while (getchar() != '\n');
 				complete_todo(temp_id);
-				save_todos_to_file(FILENAME);
+				if (argc > 1)
+				{
+					save_todos_to_file(argv[1]);
+				}
 				break;
 			case 3:
 				printf("Enter id:\n>> ");
 				scanf("%d", &temp_id);
 				while (getchar() != '\n');
 				delete_todo(temp_id);
-				save_todos_to_file(FILENAME);
+				if (argc > 1)
+				{
+					save_todos_to_file(argv[1]);
+				}
 				break;
 			case 4:
 				driver = 0;

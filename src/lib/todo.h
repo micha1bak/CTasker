@@ -1,7 +1,6 @@
 #ifndef TODO_H
 #define TODO_H
 #define MAX_TODOS 100
-#define FILENAME "../todos.txt"
 #include <stdbool.h>
 
 typedef struct {
