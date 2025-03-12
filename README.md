@@ -15,10 +15,8 @@ A command-line To-Do application written in C.
 ## Screenshots
 
 ### Main Menu
-![Menu](/utils/menu.png)
+![Menu](/utils/main.png)
 
-### Todo List
-![Todo List](/utils/todos.png)
 
 ## Installation
 
@@ -33,7 +31,7 @@ gcc -o CTasker main.c
 Run the aplication:
 
 ````
-./CTasker
+./CTasker ../name_of_your_file.txt
 ````
 
 ## File format
