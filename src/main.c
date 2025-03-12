@@ -4,27 +4,30 @@
 
 int main(int argc, char *argv[])
 {
-
 	if (argc > 1)
 	{
 		read_todos_from_file(argv[1]);
 	}
 	int driver = 1;
-	while (driver) {
+	while (driver)
+	{
 		int temp_id = 0;
 		char temp_name[250];
 		int temp_priority = 0;
 		display_todos();
-		if (scanf("%d", &driver) != 1) {
+		if (scanf("%d", &driver) != 1)
+		{
 			printf("Invalid input! Please enter a number.\n");
 			while (getchar() != '\n');
 			continue;
 		}
 		while (getchar() != '\n');
-		switch (driver) {
+		switch (driver)
+		{
 			case 1:
 				printf("Enter a todo discription\n>> ");
-				if (fgets(temp_name, sizeof(temp_name), stdin) == NULL) {
+				if (fgets(temp_name, sizeof(temp_name), stdin) == NULL)
+				{
 					printf("Error reading input.\n");
 					break;
 				}

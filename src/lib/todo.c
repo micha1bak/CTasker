@@ -5,7 +5,8 @@
 Todo todos[MAX_TODOS];
 int todos_size = 0;
 
-void create_todo(int id, char name[250], int priority, bool isCompleted) {
+void create_todo(int id, char name[250], int priority, bool isCompleted)
+{
 	Todo todo;
 	todo.id = id + 1;
 	strcpy(todo.name, name);
@@ -15,12 +16,15 @@ void create_todo(int id, char name[250], int priority, bool isCompleted) {
 	todos_size++;
 }
 
-void delete_todo(int id) {
-	if (id > todos_size) {
+void delete_todo(int id)
+{
+	if (id > todos_size || id < 1)
+	{
 		printf("Id out of range\n");
 		return;
 	}
-	for (int i = id - 1; i <= todos_size - id; i++) {
+	for (int i = id - 1; i <= todos_size - id; i++)
+	{
 		todos[i] = todos[i + 1];
 		todos[i].id--;
 	}
@@ -52,30 +56,37 @@ void display_todos(void) {
 	printf(">>");
 }
 
-void save_todos_to_file(const char *filename) {
+void save_todos_to_file(const char *filename)
+{
 	FILE *fptr = fopen(filename, "w");
-	if (fptr == NULL) {
+	if (fptr == NULL)
+	{
 		printf("Err\n");
 		return;
 	}
-	for (int i = 0; i < todos_size; i++) {
+	for (int i = 0; i < todos_size; i++)
+	{
 		fprintf(fptr, "%d|%s|%d|%d\n", todos[i].id, todos[i].name, todos[i].priority ,todos[i].isCompleted);
 	}
 	fclose(fptr);
 }
 
-void read_todos_from_file(const char *filename) {
+void read_todos_from_file(const char *filename)
+{
 	FILE *fptr = fopen(filename, "r");
-	if (fptr == NULL) {
+	if (fptr == NULL)
+	{
 		printf("Err\n");
 		return;
 	}
 	char line[300];
-	while (fgets(line, sizeof(line), fptr) && todos_size < MAX_TODOS ) {
+	while (fgets(line, sizeof(line), fptr) && todos_size < MAX_TODOS )
+	{
 		line[strcspn(line, "\n")] = '\0';
 		int id, priority, isCompleted;
 		char name[250];
-		if (sscanf(line, "%d|%249[^|]|%d|%d", &id, name, &priority, &isCompleted) == 4) {
+		if (sscanf(line, "%d|%249[^|]|%d|%d", &id, name, &priority, &isCompleted) == 4)
+		{
 			todos[todos_size].id = id;
 			strcpy(todos[todos_size].name, name);
 			todos[todos_size].priority = priority;

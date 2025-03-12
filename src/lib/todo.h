@@ -3,7 +3,8 @@
 #define MAX_TODOS 100
 #include <stdbool.h>
 
-typedef struct {
+typedef struct
+{
 	int id;
 	char name[250];
 	int priority;
