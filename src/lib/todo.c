@@ -67,7 +67,7 @@ void display_todos(void)
 	}
 	if (todos_size < 10)
 	{
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10 - todos_size; i++)
 		{
 			printf("|     |                                       |            |              |\n");
 		}

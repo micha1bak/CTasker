@@ -25,7 +25,7 @@ Clone the repository and compile the project using `gcc`:
 ````
 git clone https://github.com/micha1bak/CTasker.git
 cd CTasker
-gcc -o CTasker main.c
+gcc -o CTasker src/main.c src/lib/todo.c
 ````
 
 Run the aplication:
